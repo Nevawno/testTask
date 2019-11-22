@@ -29,18 +29,19 @@ function parser( $url, $start, $arr, $end ) {
 
             $arr[] = $source;
             
-            
-            $arr_tochek = [';'];
-            $arr_tochek2 = [''];
-            $link_for_out = str_replace($arr_tochek, $arr_tochek2, $link);
-            $link_for_out = trim($link_for_out);
-
-            echo "<a href='$link_for_out'>$title</a>" . "<italic>$domain</italic>" . "<small>$points</small>" . "<br>";
         }
 
-        
         if (count($arr) >= 100) {
             $arr = array_splice($arr, 0, 100);
+            foreach ($arr as $item) {
+                $item = explode(";", $item);
+                $arr_tochek = [';'];
+                $arr_tochek2 = [''];
+                $link_for_out = str_replace($arr_tochek, $arr_tochek2, $item[2]);
+                $link_for_out = trim($link_for_out);
+                echo "<a href='".$link_for_out."'>" . $item[0] . "</a>" . "<italic>" . $item[1] . "</italic>" . "<small>".$item[3]."</small>" . "<br>";
+
+            }
         }
         writeCVS($arr);
         
