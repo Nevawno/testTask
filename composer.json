@@ -1,0 +1,10 @@
+{
+    "name": "troya/testovoe",
+    "authors": [
+        {
+            "name": "Igor Pysarenko",
+            "email": "pysarenkoigor@gmail.com"
+        }
+    ],
+    "require": {}
+}
