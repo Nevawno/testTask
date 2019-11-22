@@ -8,8 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    <p>dasd</p>
     <?php parser( $url, $start, $arr, $end );?> 
-
+    <script>
+    window.onload = function() {
+        window.location.href = "./download.php";
+    };
+    </script>
 </body>
 </html>

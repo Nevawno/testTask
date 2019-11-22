@@ -28,7 +28,14 @@ function parser( $url, $start, $arr, $end ) {
             $source = $title . $domain . $link . $points;
 
             $arr[] = $source;
-            echo "some";
+            
+            
+            $arr_tochek = [';'];
+            $arr_tochek2 = [''];
+            $link_for_out = str_replace($arr_tochek, $arr_tochek2, $link);
+            $link_for_out = trim($link_for_out);
+
+            echo "<a href='$link_for_out'>$title</a>" . "<italic>$domain</italic>" . "<small>$points</small>" . "<br>";
         }
 
         
@@ -55,8 +62,3 @@ function writeCVS($data) {
 }
 ?>
 
-<!-- <script>
-window.onload = function() {
-    window.location.href = "./download.php";
-};
-</script> -->
