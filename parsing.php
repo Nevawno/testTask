@@ -13,16 +13,16 @@ function parser( $url, $start, $arr, $end ) {
         foreach ( $doc->find(".itemlist .athing") as $item ) {
             $item = pq( $item );
 
-            !empty($item->find( '.storylink' )->text()) ? '; ' . $title =  $item->find( '.storylink' )->text() . '  ' :
+            !empty( $item->find( '.storylink' )->text() ) ? '; ' . $title =  $item->find( '.storylink' )->text() . '  ' :
             $title = ";  No title for post  ";
             
-            !empty($item->find( '.sitestr' )->text()) ? $domain = ';  ' . $item->find( '.sitestr' )->text() . '  ' :
+            !empty ($item->find( '.sitestr' )->text() ) ? $domain = ';  ' . $item->find( '.sitestr' )->text() . '  ' :
             $domain = ";  No domain for post  ";
            
-            !empty($item->find( '.title .storylink' )->attr( 'href' )) ? $link = ';  '.$item->find( '.title .storylink' )->attr( 'href' ) . '  ; ' :
+            !empty( $item->find( '.title .storylink' )->attr( 'href' ) ) ? $link = ';  '.$item->find( '.title .storylink' )->attr( 'href' ) . '  ; ' :
             $link = ";  No link for post  ;";
            
-            !empty($item->next('tr')->find('.subtext .score')->text()) ? $points = $item->next('tr')->find('.subtext .score')->text() . '  ;' :
+            !empty( $item->next( 'tr' )->find( '.subtext .score')->text() ) ? $points = $item->next( 'tr' )->find( '.subtext .score')->text() . '  ;' :
             $points = "  No points for post  ;";
            
             $source = $title . $domain . $link . $points;
@@ -31,19 +31,18 @@ function parser( $url, $start, $arr, $end ) {
             
         }
 
-        if (count($arr) >= 100) {
+        if ( count( $arr ) >= 100 ) {
             $arr = array_splice($arr, 0, 100);
-            foreach ($arr as $item) {
-                $item = explode(";", $item);
+            foreach ( $arr as $item ) {
+                $item = explode( ";", $item);
                 $arr_tochek = [';'];
                 $arr_tochek2 = [''];
-                $link_for_out = str_replace($arr_tochek, $arr_tochek2, $item[2]);
-                $link_for_out = trim($link_for_out);
+                $link_for_out = str_replace( $arr_tochek, $arr_tochek2, $item[2] );
+                $link_for_out = trim( $link_for_out );
                 echo "<a href='".$link_for_out."'>" . $item[0] . "</a>" . "<italic>" . $item[1] . "</italic>" . "<small>".$item[3]."</small>" . "<br>";
-
             }
         }
-        writeCVS($arr);
+        writeCVS( $arr );
         
         $next = $doc->find( "td.title .morelink")->attr( 'href' );
 
@@ -54,12 +53,12 @@ function parser( $url, $start, $arr, $end ) {
     }
 }
 
-function writeCVS($data) {
+function writeCVS( $data ) {
     $f = fopen( "CSV.csv", "w" );
-    foreach ($data as $fields) {
-        fputcsv($f, explode(';', $fields), ";");
+    foreach ( $data as $fields ) {
+        fputcsv( $f, explode(';', $fields), ";" );
     }
-    fclose($f);
+    fclose( $f );
 }
 ?>
 
